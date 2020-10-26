@@ -3,6 +3,39 @@
 ## Introduction
 Parsers are systems which read, analyze & evaluate input data conforming to some formal grammar [wikipedia link](https://en.wikipedia.org/wiki/Parsing). Below I present an Arithmetic Expression parser which evaluates an expression comprising of symbols \[ +  -  *  /  (  ) and numbers \]
 
+## Installation
+The parser is encapsulated as the class **ArithExprParser** with **tokenize** & **evaluate** methods. 
+### To use as a calculator
+After cloning the repo, it can built into executable 'ArithExprParser' as shown below.
+
+From the working directory run the below command
+`g++ -std=c++14 -I./include ./src/*.cpp -o ArithExprParser`
+
+This will build the executable 'ArithExprParser'. Just run the executable to start evaluating expressions. 
+
+### To use inside your code
+If you want to use it inside your code, just include the header file 'ArithExprParser.h' and link 'ArithExprParser.cpp' into your build. A sample usage is shown below
+
+```c++
+#include <iostream>
+#include <ArithExprParser.h>
+
+int main()
+{
+    std::string expr;
+    ArithExprParser parser;
+    while(true){
+        std::cout<<"Enter Expression or type 'Q' to quit:";
+        std::cin>>expr;
+        if(expr == "Q")
+            break;
+        parser.tokenize(expr);
+        std::cout<<"Result = "<<parser.evaluate()<<std::endl;
+    }
+    
+}
+```
+
 ## Description
 The order of operations performed to evaluate an arithmetic expression is usually referred to by acronym of **BODMAS**(Bracket, Order, Division, Multiplication, Addition, Subtraction) or **PEMDAS**(Paranthesis, Exponents, Multiplication, Division, Addition, Subraction). Here we implement this order by formalizing it into a grammar. Grammars are the classical solution to parsing, as they formally define the structure of the input. Formal grammars are a much more detailed topic and for those interested further pls refer to this wikipedia page [Formal Grammars](https://en.wikipedia.org/wiki/Formal_grammar)
 
@@ -60,7 +93,7 @@ The reasoning behind the grammar definition is :-
 
 An example evaluation order is shown below for a sample expression.
 
-Input expression:- **2.3 + 3*(1+3)**
+Input expression:- **2.3 + 3\*(1+3)**
 
 Its evaluation is broken into the below steps:-
 
@@ -79,6 +112,6 @@ Its evaluation is broken into the below steps:-
         - 3 : Rule 1 of term : primary
           - 3 : Rule 1 of primary : number (**call returns**)
 
-          
-                  
+## Conclusions
+Arithmetic expression evaluation shows a simple application of grammars. Grammars are used almost universally for parsing. I plan to explore grammars in more detail in future by showing a markup language parser.
 
