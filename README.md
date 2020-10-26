@@ -38,19 +38,19 @@ Once tokens are available, the evaluator should follow the order of operations(*
  * 
  ```
 The above grammar should be interpreted like this:-
-1. Expression is a 
+1. **Expression** is a 
    - term OR
    - expression '+' term OR
    - expression '-' term
-2. term is a
+2. **term** is a
    - primary OR
    - term '*' primary OR
    - term '/' primary 
-3. primary is a 
+3. **primary** is a 
    - number(floating point) OR
    - expression enclosed in paranthesis
 
-The above structure is naturally recursive and hence we can define functions for each of expression, term & primary. Another advantage of defining the order into a grammar is it is highly intuitive. 
+The above structure is naturally recursive and hence we can define functions for each of **expression**, **term** & **primary**. Another advantage of defining the order into a grammar is it is highly intuitive. 
 
 The reasoning behind the grammar definition is :-
 
@@ -60,24 +60,24 @@ The reasoning behind the grammar definition is :-
 
 An example evaluation order is shown below for a sample expression.
 
-Input expression:- 2.3 + 3*(1+3)
+Input expression:- **2.3 + 3*(1+3)**
 
 Its evaluation is broken into the below steps:-
 
 - 2.3 + 3 * (1+3) : Rule 2 of expression: expression + term
   - 2.3 : Rule 1 of expression: term
     - 2.3 : Rule 1 of term : primary
-      - 2.3 : Rule 1 of primary : number (call returns)
+      - 2.3 : Rule 1 of primary : number (**call returns**)
   - 3 * (1+3) : Rule 2 of term: term * primary
-    - 3 : Rule 1 or term: primary
-      - 3 : Rule 1 of primary: number (call returns)
+    - 3 : Rule 1 of term: primary
+      - 3 : Rule 1 of primary: number (**call returns**)
     - (1+3) : Rule 2 of primary : expression enclosed in paranthesis
       - 1+3 : Rule 2 of expression : expression + term
         - 1 : Rule 1 of expression : term
           - 1 : Rule 1 of term : primary
-            - 1 : Rule 1 of primary : number (call returns)
+            - 1 : Rule 1 of primary : number (**call returns**)
         - 3 : Rule 1 of term : primary
-          - 3 : Rule 1 of primary : number (call returns)
+          - 3 : Rule 1 of primary : number (**call returns**)
 
           
                   
